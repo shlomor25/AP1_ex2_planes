@@ -6,7 +6,7 @@
 #include "MyFlight.h"
 #include "Serial.h"
 
-MyFlight::MyFlight(int model_number, Date date, string source, string destination, Collection* collection) : date(date) {
+MyFlight::MyFlight(int model_number, Date date, string &source, string &destination, Collection* collection) : date(date) {
     this->modelNumber = model_number;
     this->date = date;
     this->source = source;
@@ -15,7 +15,7 @@ MyFlight::MyFlight(int model_number, Date date, string source, string destinatio
     createCrew(collection);
 }
 
-MyFlight::MyFlight(string id, int model_number, Date date, string source, string destination, Collection* collection): date(date) {
+MyFlight::MyFlight(string &id, int model_number, Date date, string &source, string &destination, Collection* collection): date(date) {
     this->modelNumber = model_number;
     this->date = date;
     this->source = source;

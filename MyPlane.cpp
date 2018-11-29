@@ -13,7 +13,7 @@ MyPlane::MyPlane(int model_number, map<Jobs, int> crew_needed, map<Classes, int>
     this->ID = Serial::serial();
 }
 
-MyPlane::MyPlane(string id, int model_number, map<Jobs, int> crew_needed, map<Classes, int> max_passangers, Collection* collection) {
+MyPlane::MyPlane(string &id, int model_number, map<Jobs, int> crew_needed, map<Classes, int> max_passangers, Collection* collection) {
     this->modelNumber = model_number;
     this->crewNeeded = crew_needed;
     this->maxFirstClass = max_passangers.at(FIRST_CLASS);

@@ -18,9 +18,9 @@ private:
     Employee* employer;
 
 public:
-    MyEmployee(int seniority, int birthYear, string employerID, Jobs title, Collection* collection);
+    MyEmployee(int seniority, int birthYear, string &employerID, Jobs title, Collection* collection);
  //   MyEmployee(string id, Collection* collection);
-    MyEmployee(int seniority, int birthYear, string employerID, Jobs title, string id, Collection* collection);
+    MyEmployee(int seniority, int birthYear, string &employerID, Jobs title, string &id, Collection* collection);
     int getSeniority();
     int getBirthYear();
     Employee* getEmployer();

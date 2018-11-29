@@ -26,7 +26,7 @@ string MyEmployee::getID() {
     return ID;
 }
 
-MyEmployee::MyEmployee(int seniority, int birthYear, string employerID, Jobs title, Collection* collection) {
+MyEmployee::MyEmployee(int seniority, int birthYear, string &employerID, Jobs title, Collection* collection) {
     this->seniority = seniority;
     this->birthYear = birthYear;
     this->title = title;
@@ -42,7 +42,7 @@ MyEmployee::MyEmployee(string id, Collection* collection) {
     this->employer = collection->getEmployee(id)->getEmployer();
 }*/
 
-MyEmployee::MyEmployee(int seniority, int birthYear, string employerID, Jobs title, string id, Collection* collection) {
+MyEmployee::MyEmployee(int seniority, int birthYear, string &employerID, Jobs title, string &id, Collection* collection) {
     this->seniority = seniority;
     this->birthYear = birthYear;
     this->title = title;

@@ -16,8 +16,8 @@ private:
     string ID;
 
 public:
-    MyCustomer(string fullname, int priority, Collection* collection);
-    MyCustomer(string id, string fullname, int priority, Collection* collection);
+    MyCustomer(string &fullname, int priority, Collection* collection);
+    MyCustomer(string &id, string &fullname, int priority, Collection* collection);
     string getFullName();
     int getPriority();
     list<Reservation*> getReservations();

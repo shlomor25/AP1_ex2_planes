@@ -22,8 +22,8 @@ public:
     Classes getClass();
     int getMaxBaggage();
     string getID();
-    MyReservation(string customerId, string flightId, Classes cls, int max_baggage, Collection* collection);
-    MyReservation(string id,string customerId, string flightId, Classes cls, int max_baggage, Collection* collection);
+    MyReservation(string &customerId, string &flightId, Classes cls, int max_baggage, Collection* collection);
+    MyReservation(string &id,string &customerId, string &flightId, Classes cls, int max_baggage, Collection* collection);
     void createReservation(Collection* collection);
 };
 

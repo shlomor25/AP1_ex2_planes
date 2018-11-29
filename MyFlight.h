@@ -31,8 +31,8 @@ public:
     string getDestination();
     string getID();
 
-    MyFlight(int model_number, Date date, string source, string destination, Collection* collection);
-    MyFlight(string id, int model_number, Date date, string source, string destination, Collection* collection);
+    MyFlight(int model_number, Date date, string &source, string &destination, Collection* collection);
+    MyFlight(string &id, int model_number, Date date, string &source, string &destination, Collection* collection);
 };
 
 #endif //AP2_FLIGHT_H

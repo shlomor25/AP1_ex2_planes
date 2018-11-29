@@ -31,7 +31,7 @@ void MyReservation::createReservation(Collection* collection){
     if (collection->isBusy(f)) {throw "Flight is full!";}
 }
 
-MyReservation::MyReservation(string customerId, string flightId, Classes cls, int max_baggage, Collection* collection) {
+MyReservation::MyReservation(string &customerId, string &flightId, Classes cls, int max_baggage, Collection* collection) {
     this->customer = collection->getCustomer(customerId);
     this-> flight = collection->getFlight(flightId);
     this->cls = cls;
@@ -40,13 +40,13 @@ MyReservation::MyReservation(string customerId, string flightId, Classes cls, in
     createReservation(collection);
 }
 
-MyReservation::MyReservation(string id,string customerId, string flightId, Classes cls, int max_baggage, Collection* collection) {
-    cout << "try to load"<<endl;
+MyReservation::MyReservation(string &id,string &customerId, string &flightId, Classes cls, int max_baggage, Collection* collection) {
+    //cout<< flightId << " "<< customerId << "end"<<endl;
     this->ID = id;
     this->customer = collection->getCustomer(customerId);
     this-> flight =collection->getFlight(flightId);
     this->cls = cls;
     this->maxBaggage = max_baggage;
-
     createReservation(collection);
+
 }

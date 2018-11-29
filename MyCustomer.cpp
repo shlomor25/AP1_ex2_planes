@@ -29,14 +29,14 @@ void MyCustomer::searchReservation(Collection* collection){
     }
 }
 
-MyCustomer::MyCustomer(string fullname, int priority, Collection* collection) {
+MyCustomer::MyCustomer(string &fullname, int priority, Collection* collection) {
     this->fullName = fullname;
     this->priority = priority;
     this->ID = Serial::serial();
     searchReservation(collection);
 }
 
-MyCustomer::MyCustomer(string id, string fullname, int priority, Collection* collection) {
+MyCustomer::MyCustomer(string &id, string &fullname, int priority, Collection* collection) {
     this->fullName = fullname;
     this->priority = priority;
     this->ID = id;

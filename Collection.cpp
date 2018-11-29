@@ -38,7 +38,7 @@ list<Customer *> Collection::getCustomers() {
     return customers;
 }
 
-Reservation *Collection::getReservation(string reservationID) {
+Reservation *Collection::getReservation(string &reservationID) {
     for (auto &res : this->reservations) {
         if(res->getID() == reservationID)
             return res;
@@ -46,7 +46,7 @@ Reservation *Collection::getReservation(string reservationID) {
     return nullptr;
 }
 
-Plane *Collection::getPlane(string planeID) {
+Plane *Collection::getPlane(string &planeID) {
     for (auto &plane: this->planes) {
         if(plane->getID() == planeID)
             return plane;
@@ -62,17 +62,16 @@ Plane *Collection::getPlane(int modelNumber, Date date) {
     throw "sorry, your plane in air";
 }
 
-Employee *Collection::getEmployee(string employeeID) {
+Employee *Collection::getEmployee(string &employeeID) {
     for (auto &emp : this->employees) {
 
         if(emp->getID() == employeeID)
             return emp;
     }
-    //cout<<"aaaaaaa";
     return nullptr;
 }
 
-Flight *Collection::getFlight(string flightID) {
+Flight *Collection::getFlight(string &flightID) {
     for (auto &flight : this->flights) {
         if(flight->getID() == flightID)
             return flight;
@@ -116,7 +115,6 @@ void Collection::save() {
         file_obj << " " << lineIndex++ << "------------------------ Customers--------------------------" << endl;
         // save id, priority, full name (take reservations from other table)
         for (auto &customer : this->customers) {
-            // todo change spacebar to "-"
             file_obj << "c" << lineIndex++ << "\t" << customer->getID()
                      << "\t" << customer->getFullName()
                      << "\t" << customer->getPriority() << endl;
@@ -161,7 +159,6 @@ void Collection::save() {
 
         file_obj << " " << lineIndex++ << "------------------------ Reservations --------------------------" << endl;
         for (auto &reservation : this->reservations) {
-            cout << "write_res" <<endl;
             file_obj << "r" << lineIndex++ << "\t" << reservation->getID()
                      << "\t" << reservation->getFlight()->getID()
                      << "\t" << reservation->getCustomer()->getID()
@@ -175,7 +172,7 @@ void Collection::save() {
     }
 }
 
-void Collection::loadEmployee(string line){
+void Collection::loadEmployee(string &line){
     int i = 0;
     int sen = 0;
     string id;
@@ -215,12 +212,11 @@ void Collection::loadEmployee(string line){
         employerId += line[i];
         i++;
     }
-    if (employerId == "has'nt_employer") { employerId = "";
-        /*cout<< "no employer"<<endl;*/}
+    if (employerId == "has'nt_employer") { employerId = ""; }
     this->employees.push_back(new MyEmployee(sen, birth, employerId, title, id, this));
 }
 
-void Collection::loadCustomer(string line) {
+void Collection::loadCustomer(string &line) {
     string id;
     string name;
     int priority = 0;
@@ -241,7 +237,7 @@ void Collection::loadCustomer(string line) {
     this->customers.push_back(new MyCustomer(id, name, priority, this));
 }
 
-void Collection::loadPlane(string line){
+void Collection::loadPlane(string &line){
     string id;
     int modelNumber = 0;
     map<Classes, int> maxClasses;
@@ -249,9 +245,8 @@ void Collection::loadPlane(string line){
     int maxEconomy = 0;
     string job;
     int numJobs;
-    map<Jobs, int> crewNeeded;
+    map<Jobs , int> crewNeeded;
     int i = 0;
-
     while (line[i++] != '\t');
     // id
     while (line[i] != '\t') { id += line[i++]; }
@@ -269,7 +264,6 @@ void Collection::loadPlane(string line){
     }
     maxClasses.insert(std::pair<Classes, int>(FIRST_CLASS, maxFirst));
     i++;
-
     while (line[i] != '\t') {
         maxEconomy *= 10;
         maxEconomy += line[i++] - '0';
@@ -288,16 +282,13 @@ void Collection::loadPlane(string line){
             numJobs += line[i++] - '0';
         }
         i++;
-        Jobs j = (Jobs)(std::stoi(job)-'0');
-        crewNeeded.insert(std::pair<Jobs, int>(j, numJobs));
+        j = (Jobs)(std::stoi(job));
+        crewNeeded.insert(std::pair<Jobs , int>(j, numJobs));
     }
     this->planes.push_back(new MyPlane(id, modelNumber, crewNeeded, maxClasses, this));
 }
 
-void Collection::loadFlight(string line){
-    /*   std::istringstream x(line);
-       vector<string> y(istream_iterator<string> {x},istream_iterator<string>());
-       // todo now in x i get at()*/
+void Collection::loadFlight(string &line){
     int i = 0;
     string id;
     string date;
@@ -327,13 +318,11 @@ void Collection::loadFlight(string line){
 
 }
 
-void Collection::loadReservation(string line){
-    cout <<"load res"<<endl;
+void Collection::loadReservation(string &line){
     int i = 0;
     string id;
     string flightID;
     string customerID;
-    int modelNumber = 0;
     int cls = 0;
     int maxBaggage = 0;
     while (line[i++]!='\t');
@@ -354,12 +343,10 @@ void Collection::loadReservation(string line){
     i++;
     // class
     while (i<line.length()) {
-        cls *= 10;
+        //cls *= 10;
         cls += line[i++] - '0';
     }
     this->reservations.push_back(new MyReservation(id, customerID, flightID, Classes(cls), maxBaggage, this));
-    cout << "id: "<< id <<" cusId: "<<  customerID<<" fliID: "<<   flightID<< " cls: "<< cls << " max: "<<maxBaggage<< endl;
-
 }
 
 void Collection::load(){
@@ -390,7 +377,6 @@ void Collection::load(){
                     break;
             }
         }
-        cout <<"finish load"<<endl;
         file_obj.close();
     }
 }
@@ -408,24 +394,15 @@ bool Collection::isBusy(Employee* e, Date date) {
 
 bool Collection::isBusy(Plane* plane, Date date) {
     for (auto &f : getFlights()) {
-        if (f->getModelNumber() == plane->getModelNumber() && f->getDate() == date){
+        if (f->getID() == plane->getID() && f->getDate() == date){
             return true;
         }
     }
     return false;
 }
 
-Plane *Collection::getPlane(int modelNumber) {
-    for (auto &plane: this->planes) {
-        if(plane->getModelNumber() == modelNumber)
-            return plane;
-    }
-    return nullptr;
-}
-
-
 bool Collection::isBusy(Flight* flight){
-    Plane* p = getPlane(flight->getModelNumber());
+    Plane* p = getPlane(flight->getModelNumber(), flight->getDate());
     int economy = p->getMaxEconomyClass();
     int first = p->getMaxFirstClass();
     for (auto &r : getReservations()){

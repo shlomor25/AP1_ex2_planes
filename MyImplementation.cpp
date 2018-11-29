@@ -32,13 +32,10 @@ Plane *MyImplementation::getPlane(string id) {
 
 Flight *MyImplementation::addFlight(int model_number, Date date, string source, string destination) {
     loadData();
-    try {
-
-        Flight* flight = new MyFlight(model_number, date, source, destination, &this->collection);
-        collection.addFlight(flight);
-        cout << "Flight added successfully" << endl;
-        return flight;
-    } catch (const char* s) { cout << s << endl; }
+    Flight* flight = new MyFlight(model_number, date, source, destination, &this->collection);
+    collection.addFlight(flight);
+    cout << "Flight added successfully" << endl;
+    return flight;
 }
 
 Flight *MyImplementation::getFlight(string id) {
@@ -61,12 +58,10 @@ Customer *MyImplementation::getCustomer(string id) {
 
 Reservation *MyImplementation::addResevation(string customerId, string flightId, Classes cls, int max_baggage) {
     loadData();
-    try {
-        Reservation *reservation = new MyReservation(customerId, flightId, cls, max_baggage, &this->collection);
-        collection.addReservation(reservation);
-        cout << "Reservation added successfully" << endl;
-        return reservation;
-    } catch (const char* s) { cout << s << endl; }
+    Reservation *reservation = new MyReservation(customerId, flightId, cls, max_baggage, &this->collection);
+    collection.addReservation(reservation);
+    cout << "Reservation added successfully" << endl;
+    return reservation;
 }
 
 Reservation *MyImplementation::getReservation(string id) {

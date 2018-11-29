@@ -23,7 +23,7 @@ public:
     int getMaxEconomyClass();
     string getID();
     MyPlane(int model_number, map<Jobs, int> crew_needed, map<Classes, int> max_passangers, Collection* collection);
-    MyPlane(string id, int model_number, map<Jobs, int> crew_needed, map<Classes, int> max_passangers, Collection* collection);
+    MyPlane(string &id, int model_number, map<Jobs, int> crew_needed, map<Classes, int> max_passangers, Collection* collection);
 };
 
 

@@ -23,11 +23,11 @@ public:
     list<Flight*> getFlights();
     list<Customer*> getCustomers();
 
-    Reservation* getReservation(string reservationID);
-    Plane* getPlane(string planeID);
+    Reservation* getReservation(string &reservationID);
+    Plane* getPlane(string &planeID);
     Plane* getPlane(int modelNumber, Date date);
-    Employee* getEmployee(string employeeID);
-    Flight* getFlight(string flightID);
+    Employee* getEmployee(string &employeeID);
+    Flight* getFlight(string &flightID);
     Customer* getCustomer(string &customerID);
 
     void addReservation(Reservation* reservation);
@@ -37,11 +37,11 @@ public:
     void addCustomer(Customer* customer);
     void load();
     void save();
-    void loadEmployee(string line);
-    void loadCustomer(string line);
-    void loadFlight(string line);
-    void loadPlane(string line);
-    void loadReservation(string line);
+    void loadEmployee(string &line);
+    void loadCustomer(string &line);
+    void loadFlight(string &line);
+    void loadPlane(string &line);
+    void loadReservation(string &line);
 
     bool isBusy(Employee* e, Date date);
     bool isBusy(Plane* plane, Date date);
